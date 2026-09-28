@@ -1,0 +1,296 @@
+[
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21MAB302T",
+    "course_name": "Discrete Mathematics",
+    "credits": 4,
+    "total_no_of_hours": 48,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 519",
+        "slot": "A"
+      },
+      {
+        "day": "Wednesday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 519",
+        "slot": "A"
+      },
+      {
+        "day": "Thursday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 519",
+        "slot": "A"
+      },
+      {
+        "day": "Friday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 519",
+        "slot": "A"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21ECC301P",
+    "course_name": "Microprocessor, Microcontroller, and Interfacing Techniques",
+    "credits": 4,
+    "total_no_of_hours": 48,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 519",
+        "slot": "B"
+      },
+      {
+        "day": "Tuesday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 519",
+        "slot": "B"
+      },
+      {
+        "day": "Wednesday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 519",
+        "slot": "B"
+      },
+      {
+        "day": "Friday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 519",
+        "slot": "B-Proj"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21ECC303T",
+    "course_name": "VLSI Design and Technology",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 519",
+        "slot": "C"
+      },
+      {
+        "day": "Tuesday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 519",
+        "slot": "C"
+      },
+      {
+        "day": "Wednesday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 519",
+        "slot": "C"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21CSO355T",
+    "course_name": "Machine learning for all",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Tuesday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 519",
+        "slot": "D"
+      },
+      {
+        "day": "Thursday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 519",
+        "slot": "D"
+      },
+      {
+        "day": "Friday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 519",
+        "slot": "D"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21ECE371T",
+    "course_name": "Database Design and Management",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 519",
+        "slot": "E"
+      },
+      {
+        "day": "Thursday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 519",
+        "slot": "E"
+      },
+      {
+        "day": "Friday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 519",
+        "slot": "E"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21GNP301L",
+    "course_name": "Community connect",
+    "credits": 1,
+    "total_no_of_hours": 12,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Tuesday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 519",
+        "slot": "F"
+      },
+      {
+        "day": "Thursday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 519",
+        "slot": "F"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21PDM301L",
+    "course_name": "Analytical and logical thinking skills",
+    "credits": 0,
+    "total_no_of_hours": 0,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Wednesday",
+        "period": "8, 9",
+        "time": "03:10 - 04:50",
+        "room": "625",
+        "slot": "G"
+      },
+      {
+        "day": "Friday",
+        "period": "6, 7",
+        "time": "01:20 - 03:00",
+        "room": "625",
+        "slot": "G"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21LEM301T",
+    "course_name": "Indian Art Form",
+    "credits": 0,
+    "total_no_of_hours": 0,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Wednesday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 519",
+        "slot": "H"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering (Data Science)",
+    "year": "3",
+    "section": "III-ECE-DS",
+    "course_code": "21ECC311L",
+    "course_name": "VLSI Design/ Microprocessor Laboratory",
+    "credits": 2,
+    "total_no_of_hours": 24,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Tuesday",
+        "period": "6, 7",
+        "time": "01:20 - 03:00",
+        "room": "LAB-108/107",
+        "slot": "LAB"
+      },
+      {
+        "day": "Friday",
+        "period": "8, 9",
+        "time": "03:10 - 04:50",
+        "room": "LAB-108/107",
+        "slot": "LAB"
+      }
+    ]
+  }
+]

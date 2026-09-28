@@ -1,0 +1,478 @@
+[
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-A",
+    "course_code": "21GNH401T",
+    "course_name": "Behavioural Psychology",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 225",
+        "slot": "A"
+      },
+      {
+        "day": "Thursday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 225",
+        "slot": "A"
+      },
+      {
+        "day": "Friday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 225",
+        "slot": "A"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-A",
+    "course_code": "21ECC401T",
+    "course_name": "Wireless Communication and Antenna Systems",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Tuesday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 225",
+        "slot": "B"
+      },
+      {
+        "day": "Wednesday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 225",
+        "slot": "B"
+      },
+      {
+        "day": "Thursday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 225",
+        "slot": "B"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-A",
+    "course_code": "21ECC402P",
+    "course_name": "Computer Communication and Network Security",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 225",
+        "slot": "C"
+      },
+      {
+        "day": "Tuesday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 225",
+        "slot": "C"
+      },
+      {
+        "day": "Friday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 225",
+        "slot": "C"
+      },
+      {
+        "day": "Wednesday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "LAB - IST 108",
+        "slot": "LAB"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-A",
+    "course_code": "21ECE461T",
+    "course_name": "Semiconductor Memory Design",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 225",
+        "slot": "D"
+      },
+      {
+        "day": "Tuesday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 225",
+        "slot": "D"
+      },
+      {
+        "day": "Friday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 225",
+        "slot": "D"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-A",
+    "course_code": "21ECE463T",
+    "course_name": "Scripting Language for Electronic Design Automation",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Wednesday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 225",
+        "slot": "E"
+      },
+      {
+        "day": "Thursday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 225",
+        "slot": "E"
+      },
+      {
+        "day": "Friday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 225",
+        "slot": "E"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-A",
+    "course_code": "21CSO355T",
+    "course_name": "Machine learning for all",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Tuesday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 225",
+        "slot": "F"
+      },
+      {
+        "day": "Wednesday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 225",
+        "slot": "F"
+      },
+      {
+        "day": "Thursday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 225",
+        "slot": "F"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-A",
+    "course_code": "21ECC402P-LAB",
+    "course_name": "Computer Communication and Network Security Laboratory",
+    "credits": 1,
+    "total_no_of_hours": 12,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Wednesday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "LAB - IST 108",
+        "slot": "LAB"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-B",
+    "course_code": "21GNH401T",
+    "course_name": "Behavioural Psychology",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 227",
+        "slot": "A"
+      },
+      {
+        "day": "Wednesday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 227",
+        "slot": "A"
+      },
+      {
+        "day": "Thursday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 227",
+        "slot": "A"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-B",
+    "course_code": "21ECC401T",
+    "course_name": "Wireless Communication and Antenna Systems",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Tuesday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 227",
+        "slot": "B"
+      },
+      {
+        "day": "Wednesday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 227",
+        "slot": "B"
+      },
+      {
+        "day": "Thursday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 227",
+        "slot": "B"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-B",
+    "course_code": "21ECC402P",
+    "course_name": "Computer Communication and Network Security",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 227",
+        "slot": "C"
+      },
+      {
+        "day": "Tuesday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 227",
+        "slot": "C"
+      },
+      {
+        "day": "Wednesday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 227",
+        "slot": "C"
+      },
+      {
+        "day": "Thursday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "LAB - IST 108",
+        "slot": "LAB"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-B",
+    "course_code": "21ECE461T",
+    "course_name": "Semiconductor Memory Design",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Wednesday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 227",
+        "slot": "D"
+      },
+      {
+        "day": "Thursday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 227",
+        "slot": "D"
+      },
+      {
+        "day": "Friday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 227",
+        "slot": "D"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-B",
+    "course_code": "21ECE463T",
+    "course_name": "Scripting Language for Electronic Design Automation",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 227",
+        "slot": "E"
+      },
+      {
+        "day": "Tuesday",
+        "period": "2",
+        "time": "09:50 - 10:40",
+        "room": "IST 227",
+        "slot": "E"
+      },
+      {
+        "day": "Friday",
+        "period": "1",
+        "time": "09:00 - 09:50",
+        "room": "IST 227",
+        "slot": "E"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-B",
+    "course_code": "21CSO355T",
+    "course_name": "Machine learning for all",
+    "credits": 3,
+    "total_no_of_hours": 36,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Monday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 227",
+        "slot": "F"
+      },
+      {
+        "day": "Tuesday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "IST 227",
+        "slot": "F"
+      },
+      {
+        "day": "Friday",
+        "period": "4",
+        "time": "11:40 - 12:30",
+        "room": "IST 227",
+        "slot": "F"
+      }
+    ]
+  },
+  {
+    "department": "Electronics and Communication Engineering",
+    "year": "4",
+    "section": "IV-ECE-B",
+    "course_code": "21ECC402P-LAB",
+    "course_name": "Computer Communication and Network Security Laboratory",
+    "credits": 1,
+    "total_no_of_hours": 12,
+    "semester": "Odd Semester (2026-2027)",
+    "semester_start_date": "2026-07-06",
+    "semester_end_date": "2026-11-27",
+    "timetable": [
+      {
+        "day": "Thursday",
+        "period": "3",
+        "time": "10:50 - 11:40",
+        "room": "LAB - IST 108",
+        "slot": "LAB"
+      }
+    ]
+  }
+]
