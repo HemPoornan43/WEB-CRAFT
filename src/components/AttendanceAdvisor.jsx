@@ -137,7 +137,13 @@ export default function AttendanceAdvisor({ section, evaluation, distribution, a
   }]);
   const [input, setInput]       = useState('');
   const [loading, setLoading]   = useState(false);
-  const [apiKey, setApiKey]     = useState(() => sessionStorage.getItem('gemini_key') || '');
+  const [apiKey, setApiKey]     = useState(() => {
+    try {
+      return (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('gemini_key')) || '';
+    } catch {
+      return '';
+    }
+  });
   const [showKeyInput, setShowKeyInput] = useState(false);
   const bottomRef = useRef(null);
   const inputRef  = useRef(null);
@@ -151,7 +157,9 @@ export default function AttendanceAdvisor({ section, evaluation, distribution, a
   }, [open]);
 
   const saveApiKey = (key) => {
-    sessionStorage.setItem('gemini_key', key);
+    try {
+      if (typeof sessionStorage !== 'undefined') sessionStorage.setItem('gemini_key', key);
+    } catch {}
     setApiKey(key);
     setShowKeyInput(false);
   };
@@ -273,7 +281,7 @@ export default function AttendanceAdvisor({ section, evaluation, distribution, a
                 </button>
                 {apiKey && (
                   <button className="btn btn-outline" style={{ padding: '8px 14px', fontSize: '0.8rem' }}
-                    onClick={() => { sessionStorage.removeItem('gemini_key'); setApiKey(''); setShowKeyInput(false); }}>
+                    onClick={() => { try { sessionStorage.removeItem('gemini_key'); } catch {} setApiKey(''); setShowKeyInput(false); }}>
                     Clear
                   </button>
                 )}

@@ -8,28 +8,39 @@ export default function LoginPage({ onLogin }) {
   const [error, setError]           = useState('');
   const [showPwd, setShowPwd]       = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!registerNo.trim() || !password.trim()) {
+  // Core login logic — accepts credentials directly (avoids React state timing issues)
+  const doLogin = async (regNo, pwd) => {
+    if (!regNo.trim() || !pwd.trim()) {
       setError('Please enter both Register Number and Password.');
       return;
     }
     setLoading(true);
     setError('');
 
-    const result = await loginStudent(registerNo, password);
-
-    setLoading(false);
-    if (result.error) {
-      setError(result.error);
-    } else {
-      onLogin(result.student, result.attendanceRows);
+    try {
+      const result = await loginStudent(regNo.trim(), pwd.trim());
+      if (result.error) {
+        setError(result.error);
+      } else {
+        onLogin(result.student, result.attendanceRows);
+      }
+    } catch (err) {
+      setError('Unexpected error: ' + (err.message || 'Please try again.'));
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    doLogin(registerNo, password);
+  };
+
+  // Fill AND immediately login with demo credentials
   const handleDemo = () => {
     setRegisterNo('DEMO');
     setPassword('demo');
+    doLogin('DEMO', 'demo');
   };
 
   return (

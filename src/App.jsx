@@ -20,56 +20,45 @@ import AttendanceCharts from './components/AttendanceCharts.jsx';
 import LeaveSimulator from './components/LeaveSimulator.jsx';
 import AttendanceAdvisor from './components/AttendanceAdvisor.jsx';
 
-// ─── Compute overall % from DB attendance rows ───
+// Compute overall % from DB attendance rows
 function computeOverallFromDB(attendanceRows) {
   if (!attendanceRows || attendanceRows.length === 0) return 75;
   const totalAttended = attendanceRows.reduce((s, r) => s + (r.attended || 0), 0);
-  const totalClasses  = attendanceRows.reduce((s, r) => s + (r.total || 0), 0);
-  if (totalClasses === 0) return 75;
-  return parseFloat(((totalAttended / totalClasses) * 100).toFixed(2));
+  const totalClasses  = attendanceRows.reduce((s, r) => s + (r.total    || 0), 0);
+  return totalClasses > 0
+    ? parseFloat(((totalAttended / totalClasses) * 100).toFixed(2))
+    : 75;
+}
+
+// Build per-subject % map from DB rows
+function buildSubjectPercentages(attendanceRows, defaultPct = 75) {
+  const map = {};
+  if (!attendanceRows) return map;
+  attendanceRows.forEach(row => {
+    if (row.subject_code && row.total > 0) {
+      map[row.subject_code] = parseFloat(((row.attended / row.total) * 100).toFixed(2));
+    }
+  });
+  return map;
 }
 
 export default function App() {
   // ── Auth state ──
-  const [student, setStudent]       = useState(null);
+  const [student, setStudent]           = useState(null);
   const [dbAttendance, setDbAttendance] = useState([]);
 
   // ── Dashboard state ──
   const [selectedSectionId, setSelectedSectionId] = useState(CLASS_SECTIONS[0].id);
-  const [asOfDate, setAsOfDate]       = useState(DEFAULT_TODAY_DATE);
-  const [futureDate, setFutureDate]   = useState(SEMESTER_END_DATE);
+  const [asOfDate, setAsOfDate]         = useState(DEFAULT_TODAY_DATE);
+  const [futureDate, setFutureDate]     = useState(SEMESTER_END_DATE);
   const [overallPercentage, setOverallPercentage] = useState(75);
-  const [mode, setMode]               = useState('quick');
-  const [activeTab, setActiveTab]     = useState('overview');
+  const [mode, setMode]                 = useState('quick');
+  const [activeTab, setActiveTab]       = useState('overview');
 
-  // ── Login handler: sets student + loads attendance from DB ──
-  const handleLogin = (studentData, attendanceRows) => {
-    setStudent(studentData);
-    setDbAttendance(attendanceRows);
+  // Per-subject attendance % (keyed by subject code)
+  const [subjectPercentages, setSubjectPercentages] = useState({});
 
-    // Auto-select their section
-    const matchedSection = CLASS_SECTIONS.find(s => s.id === studentData.section_id);
-    if (matchedSection) setSelectedSectionId(matchedSection.id);
-
-    // Auto-compute overall attendance % from DB records
-    const computedPct = computeOverallFromDB(attendanceRows);
-    setOverallPercentage(computedPct);
-  };
-
-  const handleLogout = () => {
-    setStudent(null);
-    setDbAttendance([]);
-    setOverallPercentage(75);
-    setSelectedSectionId(CLASS_SECTIONS[0].id);
-    setActiveTab('overview');
-  };
-
-  // ── Show login screen if not authenticated ──
-  if (!student) {
-    return <LoginPage onLogin={handleLogin} />;
-  }
-
-  // ── Dashboard logic ──
+  // ── Dashboard derived state (ALWAYS called unconditionally before any early returns) ──
   const selectedSection = useMemo(
     () => CLASS_SECTIONS.find(s => s.id === selectedSectionId) || CLASS_SECTIONS[0],
     [selectedSectionId]
@@ -83,31 +72,70 @@ export default function App() {
   const evaluation = useMemo(
     () => evaluateAttendance({
       currentPercentage: overallPercentage,
-      pastClasses: distribution.overallPast,
-      remainingClasses: distribution.overallRemaining,
-      totalClasses: distribution.overallTotal,
+      pastClasses:       distribution.overallPast,
+      remainingClasses:  distribution.overallRemaining,
+      totalClasses:      distribution.overallTotal,
     }),
     [overallPercentage, distribution]
   );
 
+  // ── Login handler ──
+  const handleLogin = (studentData, attendanceRows) => {
+    if (!studentData) return;
+    setStudent(studentData);
+    setDbAttendance(attendanceRows || []);
+
+    // Auto-select section
+    if (studentData.section_id) {
+      const matched = CLASS_SECTIONS.find(s => s.id === studentData.section_id);
+      if (matched) setSelectedSectionId(matched.id);
+    }
+
+    // Auto-compute overall % from DB
+    const overall = computeOverallFromDB(attendanceRows);
+    setOverallPercentage(overall);
+
+    // Build per-subject % map from DB rows
+    const perSubject = buildSubjectPercentages(attendanceRows, overall);
+    setSubjectPercentages(perSubject);
+  };
+
+  const handleLogout = () => {
+    setStudent(null);
+    setDbAttendance([]);
+    setOverallPercentage(75);
+    setSubjectPercentages({});
+    setSelectedSectionId(CLASS_SECTIONS[0].id);
+    setActiveTab('overview');
+  };
+
+  const handleSubjectPercentageChange = (code, value) => {
+    setSubjectPercentages(prev => ({ ...prev, [code]: value }));
+  };
+
+  // ── Show login if not authenticated ──
+  if (!student) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
   const tabs = [
-    { id: 'overview',  label: '📊 Overview',   title: 'Dashboard Overview' },
-    { id: 'charts',    label: '📈 Charts',      title: 'Attendance Health Charts' },
-    { id: 'leave',     label: '📋 OD / Leave',  title: 'Leave & OD Simulator' },
-    { id: 'subjects',  label: '📚 Subjects',    title: 'Subject-Wise Breakdown' },
-    { id: 'timetable', label: '🗓️ Timetable',   title: 'Weekly Schedule Matrix' },
+    { id: 'overview',  label: '📊 Overview'  },
+    { id: 'charts',    label: '📈 Charts'    },
+    { id: 'leave',     label: '📋 OD / Leave'},
+    { id: 'subjects',  label: '📚 Subjects'  },
+    { id: 'timetable', label: '🗓️ Timetable' },
   ];
 
   return (
     <div className="app-container">
-      {/* Header with student info + logout */}
+      {/* ── Header with student pill + logout ── */}
       <header className="top-nav">
         <div className="brand-wrapper">
           <div className="pixel-logo">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
               stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
-              <path d="m9 9.5 2 2 4-4" />
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+              <path d="m9 9.5 2 2 4-4"/>
             </svg>
           </div>
           <div className="brand-info">
@@ -117,7 +145,6 @@ export default function App() {
         </div>
 
         <div className="nav-actions">
-          {/* Student info pill */}
           <div className="student-info-pill">
             <span className="student-avatar">👤</span>
             <div className="student-pill-text">
@@ -127,7 +154,7 @@ export default function App() {
           </div>
 
           <div className="status-pill">
-            <span className="pulse-dot" />
+            <span className="pulse-dot"/>
             <span>Semester: Aug 29 – Nov 29, 2026</span>
           </div>
 
@@ -142,7 +169,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* DB attendance snapshot banner */}
+      {/* DB data banner */}
       {dbAttendance.length > 0 && (
         <div className="db-data-banner">
           <span>📡 Attendance loaded from database</span>
@@ -188,7 +215,7 @@ export default function App() {
         ))}
       </nav>
 
-      {/* ── Tab: Overview ── */}
+      {/* ── Overview ── */}
       {activeTab === 'overview' && (
         <>
           <div className="dashboard-grid">
@@ -208,7 +235,7 @@ export default function App() {
         </>
       )}
 
-      {/* ── Tab: Charts ── */}
+      {/* ── Charts ── */}
       {activeTab === 'charts' && (
         <AttendanceCharts
           evaluation={evaluation}
@@ -217,7 +244,7 @@ export default function App() {
         />
       )}
 
-      {/* ── Tab: OD / Leave ── */}
+      {/* ── OD / Leave ── */}
       {activeTab === 'leave' && (
         <LeaveSimulator
           section={selectedSection}
@@ -227,17 +254,16 @@ export default function App() {
         />
       )}
 
-      {/* ── Tab: Subjects ── */}
+      {/* ── Subjects ── */}
       {activeTab === 'subjects' && (
         <SubjectBreakdown
-          section={selectedSection}
-          distribution={distribution}
-          overallPercentage={overallPercentage}
-          dbAttendance={dbAttendance}
+          subjectStats={distribution.subjectStats}
+          subjectPercentages={subjectPercentages}
+          onSubjectPercentageChange={handleSubjectPercentageChange}
         />
       )}
 
-      {/* ── Tab: Timetable ── */}
+      {/* ── Timetable ── */}
       {activeTab === 'timetable' && (
         <TimetableSchedule section={selectedSection} asOfDate={asOfDate} />
       )}
