@@ -16,16 +16,49 @@ export const supabase = isSupabaseConfigured
   : null;
 
 /**
+ * Test Supabase connectivity and verify database tables.
+ * @returns {{ connected: boolean, configured: boolean, message: string }}
+ */
+export async function testSupabaseConnection() {
+  if (!supabase) {
+    return {
+      connected: false,
+      configured: false,
+      message: 'Supabase credentials not configured in .env.local (Running in Demo Mode)'
+    };
+  }
+  try {
+    const { error } = await supabase.from('students').select('id', { count: 'exact', head: true });
+    if (error) throw error;
+    return {
+      connected: true,
+      configured: true,
+      message: '🟢 Successfully connected to Supabase database!'
+    };
+  } catch (err) {
+    console.warn('Supabase test connection failed:', err);
+    return {
+      connected: false,
+      configured: true,
+      message: `Database connection error: ${err.message || 'Check database schema & RLS policies'}`
+    };
+  }
+}
+
+/**
  * Authenticate student by register_no + password.
- * Uses a simple password comparison (plain-text demo).
- * In production, use bcrypt hashing.
+ * Queries Supabase 'students' and 'attendance' tables.
+ * Falls back to demo account if offline or Supabase connection fails.
  *
  * @returns {{ student, attendanceRows, error }}
  */
 export async function loginStudent(registerNo, password) {
+  const cleanReg = registerNo.trim().toUpperCase();
+  const cleanPwd = password.trim();
+
   if (!supabase) {
     // ─── Demo mode: no Supabase configured ───
-    return demoLogin(registerNo, password);
+    return demoLogin(cleanReg, cleanPwd);
   }
 
   try {
@@ -33,18 +66,22 @@ export async function loginStudent(registerNo, password) {
     const { data: students, error: fetchErr } = await supabase
       .from('students')
       .select('*')
-      .eq('register_no', registerNo.trim().toUpperCase())
+      .eq('register_no', cleanReg)
       .limit(1);
 
     if (fetchErr) throw fetchErr;
+
     if (!students || students.length === 0) {
-      return { error: 'Student not found. Check your Register Number.' };
+      // Check if user entered a built-in demo account
+      const demoResult = demoLogin(cleanReg, cleanPwd);
+      if (!demoResult.error) return demoResult;
+      return { error: 'Student not found in database. Check your Register Number or use demo credentials (DEMO / demo).' };
     }
 
     const student = students[0];
 
-    // 2. Verify password (plain-text comparison for demo; use bcrypt in production)
-    if (student.password_hash !== password) {
+    // 2. Verify password
+    if (student.password_hash !== cleanPwd) {
       return { error: 'Incorrect password. Please try again.' };
     }
 
@@ -52,15 +89,39 @@ export async function loginStudent(registerNo, password) {
     const { data: attendanceRows, error: attErr } = await supabase
       .from('attendance')
       .select('*')
-      .eq('register_no', registerNo.trim().toUpperCase());
+      .eq('register_no', cleanReg);
 
     if (attErr) throw attErr;
 
     return { student, attendanceRows: attendanceRows || [] };
 
   } catch (err) {
-    console.error('Supabase login error:', err);
-    return { error: err.message || 'Connection error. Check your Supabase credentials.' };
+    console.warn('Supabase login error, falling back to demo mode if applicable:', err);
+    // Graceful fallback to demo data if the DB has network / schema issues
+    const demoResult = demoLogin(cleanReg, cleanPwd);
+    if (!demoResult.error) {
+      console.info('Authenticated using offline demo dataset');
+      return demoResult;
+    }
+    return { error: `Database error: ${err.message || 'Connection failed. Verify Supabase credentials and run database/supabase_master_setup.sql.'}` };
+  }
+}
+
+/**
+ * Fetch timetable records from Supabase for a given section/department.
+ */
+export async function fetchTimetableRecords(section) {
+  if (!supabase) return null;
+  try {
+    const { data, error } = await supabase
+      .from('timetable_records')
+      .select('*')
+      .ilike('section', `%${section}%`);
+    if (error) throw error;
+    return data;
+  } catch (e) {
+    console.warn('Failed to fetch timetable records from Supabase:', e);
+    return null;
   }
 }
 
@@ -69,17 +130,21 @@ export async function loginStudent(registerNo, password) {
  */
 export async function saveAttendance(registerNo, subjectCode, attended, total) {
   if (!supabase) return { error: 'Not configured' };
-  const { error } = await supabase
-    .from('attendance')
-    .upsert({
-      register_no: registerNo,
-      subject_code: subjectCode,
-      attended,
-      total,
-      as_of_date: new Date().toISOString().split('T')[0],
-      updated_at: new Date().toISOString(),
-    }, { onConflict: 'register_no,subject_code' });
-  return { error };
+  try {
+    const { error } = await supabase
+      .from('attendance')
+      .upsert({
+        register_no: registerNo,
+        subject_code: subjectCode,
+        attended,
+        total,
+        as_of_date: new Date().toISOString().split('T')[0],
+        updated_at: new Date().toISOString(),
+      }, { onConflict: 'register_no,subject_code' });
+    return { error };
+  } catch (e) {
+    return { error: e.message };
+  }
 }
 
 // ─── Demo mode: hardcoded test accounts (no Supabase needed) ───
