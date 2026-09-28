@@ -2,6 +2,8 @@
 > **VibeCraft 2026 · Round 1: The Overworld**
 > Built for students to predict, track, and optimize semester attendance with what-if simulations, AI guidance, and Supabase integration.
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FHemPoornan43%2FWEB-CRAFT)
+
 ---
 
 ## 📁 Project Architecture & File Organization
