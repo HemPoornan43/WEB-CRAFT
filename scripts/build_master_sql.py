@@ -50,10 +50,17 @@ CREATE POLICY "Allow public read attendance" ON public.attendance FOR SELECT USI
 DROP POLICY IF EXISTS "Allow public write attendance" ON public.attendance;
 CREATE POLICY "Allow public write attendance" ON public.attendance FOR ALL USING (true);
 
--- 4. Seed Test Student Accounts
+-- 4. Seed Test Student Accounts (Multi-Scenario Test Data)
 INSERT INTO public.students (register_no, name, section_id, department, year, email, password_hash)
 VALUES
-  ('DEMO', 'Demo Student', 'I-ECE-A', 'Electronics & Communication Engineering', '1st Year', 'demo@student.edu', 'demo'),
+  -- Scenario 1: Distinction Zone (92.6% · 20+ Safe Bunks)
+  ('21ECE101', 'Aditya Raman', 'I-ECE-A', 'Electronics & Communication Engineering', '1st Year', 'aditya.raman@student.srm.edu', 'pass123'),
+
+  -- Scenario 2: Danger Zone / Detention Risk (< 75% · Urgent Recovery)
+  ('22BME202', 'Kavya Sundaram', 'II-BME', 'Biomedical Engineering / SEEE', '2nd Year', 'kavya.sundaram@student.srm.edu', 'pass123'),
+
+  -- Scenario 3: Standard / Balanced Demo Account
+  ('DEMO', 'Aarav Sharma', 'I-ECE-A', 'Electronics & Communication Engineering', '1st Year', 'demo@student.edu', 'demo'),
   ('21BCE0001', 'Aarav Sharma', 'I-ECE-A', 'Electronics & Communication Engineering', '1st Year', 'aarav@test.com', 'password123'),
   ('21BCE0002', 'Priya Nair', 'I-ECE-A', 'Electronics & Communication Engineering', '1st Year', 'priya@test.com', 'demo'),
   ('21BCE0003', 'Rahul Verma', 'I-ECE-B', 'Electronics & Communication Engineering', '1st Year', 'rahul@test.com', 'password123'),
@@ -64,6 +71,50 @@ ON CONFLICT (register_no) DO UPDATE SET
   section_id = EXCLUDED.section_id;
 
 -- 5. Seed Attendance Data for Students
+
+-- 5a. Seed Distinction Attendance for 21ECE101 (Overall 92.57% · Safe Buffer)
+INSERT INTO public.attendance (student_id, register_no, subject_code, subject_name, attended, total, as_of_date)
+SELECT s.id, s.register_no, sub.code, sub.name, sub.attended, sub.total, CURRENT_DATE
+FROM public.students s,
+(VALUES
+  ('21MAB102T', 'Advanced Calculus and Complex Analysis', 21, 22),
+  ('21CYB101J', 'Chemistry', 28, 30),
+  ('21BTB102J', 'Electronic System and PCB Design', 11, 12),
+  ('21CSS101J', 'Programming for Problem Solving', 24, 25),
+  ('21GNH101J', 'Philosophy of Engineering', 15, 16),
+  ('21BTB103T', 'Biology', 9, 10),
+  ('21LEH104T', 'German Language', 16, 18),
+  ('21MES101L', 'Basic Civil and Mechanical Workshop', 19, 20),
+  ('21PDM102L', 'General Aptitude (CDC)', 10, 12),
+  ('21GNM102L', 'NSS / Social Outreach', 9, 10)
+) AS sub(code, name, attended, total)
+WHERE s.register_no = '21ECE101'
+ON CONFLICT (register_no, subject_code) DO UPDATE SET
+  attended = EXCLUDED.attended,
+  total = EXCLUDED.total;
+
+-- 5b. Seed Danger Zone Attendance for 22BME202 (Overall 68.60% · < 75% Detention Risk)
+INSERT INTO public.attendance (student_id, register_no, subject_code, subject_name, attended, total, as_of_date)
+SELECT s.id, s.register_no, sub.code, sub.name, sub.attended, sub.total, CURRENT_DATE
+FROM public.students s,
+(VALUES
+  ('21MAB201T', 'Transforms and Boundary Value Problems', 14, 22),
+  ('21BMC202T', 'Biomedical Signals and Systems', 12, 18),
+  ('21BMC203J', 'Electric and Electronic Circuits', 16, 24),
+  ('21BMC204J', 'Digital Logic for Medical Systems', 13, 18),
+  ('21PYS202T', 'Medical Physics', 12, 18),
+  ('21LEM201T', 'Professional Ethics', 4, 6),
+  ('21LEM202T', 'Universal Human Values-II', 14, 18),
+  ('21PDM201L', 'Verbal Reasoning (CDC)', 7, 12),
+  ('21PDH201T', 'Social Engineering', 9, 12),
+  ('21BMC205L', 'DLMS & Circuit Laboratory', 17, 24)
+) AS sub(code, name, attended, total)
+WHERE s.register_no = '22BME202'
+ON CONFLICT (register_no, subject_code) DO UPDATE SET
+  attended = EXCLUDED.attended,
+  total = EXCLUDED.total;
+
+-- 5c. Seed Standard Attendance for DEMO / 21BCE0001 (Overall 79.43% · Balanced)
 INSERT INTO public.attendance (student_id, register_no, subject_code, subject_name, attended, total, as_of_date)
 SELECT s.id, s.register_no, sub.code, sub.name, sub.attended, sub.total, CURRENT_DATE
 FROM public.students s,

@@ -1,8 +1,8 @@
 // Supabase client singleton
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL  = import.meta.env.VITE_SUPABASE_URL  || '';
-const SUPABASE_KEY  = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const SUPABASE_URL  = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_URL)  || '';
+const SUPABASE_KEY  = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPABASE_ANON_KEY) || '';
 
 // Detect placeholder / unfilled values
 const isRealURL = SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('YOUR_PROJECT');
@@ -150,12 +150,40 @@ export async function saveAttendance(registerNo, subjectCode, attended, total) {
 // ─── Demo mode: hardcoded test accounts (no Supabase needed) ───
 const DEMO_STUDENTS = [
   {
+    register_no: '21ECE101',
+    name: 'Aditya Raman',
+    section_id: 'I-ECE-A',
+    department: 'Electronics & Communication Engineering',
+    year: '1st Year',
+    password_hash: 'pass123',
+    scenario: 'Distinction Zone (92.6% · 20+ Safe Bunks)',
+  },
+  {
+    register_no: '22BME202',
+    name: 'Kavya Sundaram',
+    section_id: 'II-BME',
+    department: 'Biomedical Engineering / SEEE',
+    year: '2nd Year',
+    password_hash: 'pass123',
+    scenario: 'Danger Zone (< 75% · Detention Alert Active)',
+  },
+  {
+    register_no: 'DEMO',
+    name: 'Aarav Sharma',
+    section_id: 'I-ECE-A',
+    department: 'Electronics & Communication Engineering',
+    year: '1st Year',
+    password_hash: 'demo',
+    scenario: 'Balanced Zone (79.4% · Moderate Buffer)',
+  },
+  {
     register_no: '21BCE0001',
     name: 'Aarav Sharma',
     section_id: 'I-ECE-A',
     department: 'Electronics & Communication Engineering',
     year: '1st Year',
     password_hash: 'password123',
+    scenario: 'Standard ECE Student',
   },
   {
     register_no: '21BCE0002',
@@ -164,18 +192,53 @@ const DEMO_STUDENTS = [
     department: 'Electronics & Communication Engineering',
     year: '1st Year',
     password_hash: 'demo',
-  },
-  {
-    register_no: 'DEMO',
-    name: 'Demo Student',
-    section_id: 'I-ECE-A',
-    department: 'Electronics & Communication Engineering',
-    year: '1st Year',
-    password_hash: 'demo',
+    scenario: 'Standard ECE Student',
   },
 ];
 
 const DEMO_ATTENDANCE = {
+  // Scenario 1: Distinction Zone (92.57% Safe Buffer, >20 Bunks Allowed) - Section I-ECE-A
+  '21ECE101': [
+    { subject_code: '21MAB102T', subject_name: 'Advanced Calculus and Complex Analysis', attended: 21, total: 22 },
+    { subject_code: '21CYB101J', subject_name: 'Chemistry', attended: 28, total: 30 },
+    { subject_code: '21BTB102J', subject_name: 'Electronic System and PCB Design', attended: 11, total: 12 },
+    { subject_code: '21CSS101J', subject_name: 'Programming for Problem Solving', attended: 24, total: 25 },
+    { subject_code: '21GNH101J', subject_name: 'Philosophy of Engineering', attended: 15, total: 16 },
+    { subject_code: '21BTB103T', subject_name: 'Biology', attended: 9, total: 10 },
+    { subject_code: '21LEH104T', subject_name: 'German Language', attended: 16, total: 18 },
+    { subject_code: '21MES101L', subject_name: 'Basic Civil and Mechanical Workshop', attended: 19, total: 20 },
+    { subject_code: '21PDM102L', subject_name: 'General Aptitude (CDC)', attended: 10, total: 12 },
+    { subject_code: '21GNM102L', subject_name: 'NSS / Social Outreach', attended: 9, total: 10 },
+  ],
+
+  // Scenario 2: Danger Zone / Detention Risk (68.60% < 75% Threshold) - Section II-BME
+  '22BME202': [
+    { subject_code: '21MAB201T', subject_name: 'Transforms and Boundary Value Problems', attended: 14, total: 22 },
+    { subject_code: '21BMC202T', subject_name: 'Biomedical Signals and Systems', attended: 12, total: 18 },
+    { subject_code: '21BMC203J', subject_name: 'Electric and Electronic Circuits', attended: 16, total: 24 },
+    { subject_code: '21BMC204J', subject_name: 'Digital Logic for Medical Systems', attended: 13, total: 18 },
+    { subject_code: '21PYS202T', subject_name: 'Medical Physics', attended: 12, total: 18 },
+    { subject_code: '21LEM201T', subject_name: 'Professional Ethics', attended: 4, total: 6 },
+    { subject_code: '21LEM202T', subject_name: 'Universal Human Values-II', attended: 14, total: 18 },
+    { subject_code: '21PDM201L', subject_name: 'Verbal Reasoning (CDC)', attended: 7, total: 12 },
+    { subject_code: '21PDH201T', subject_name: 'Social Engineering', attended: 9, total: 12 },
+    { subject_code: '21BMC205L', subject_name: 'DLMS & Circuit Laboratory', attended: 17, total: 24 },
+  ],
+
+  // Scenario 3: Balanced Zone (79.43% - Moderate Buffer) - Section I-ECE-A
+  'DEMO': [
+    { subject_code: '21MAB102T', subject_name: 'Advanced Calculus and Complex Analysis', attended: 18, total: 22 },
+    { subject_code: '21CYB101J', subject_name: 'Chemistry', attended: 25, total: 30 },
+    { subject_code: '21BTB102J', subject_name: 'Electronic System and PCB Design', attended: 8, total: 12 },
+    { subject_code: '21CSS101J', subject_name: 'Programming for Problem Solving', attended: 20, total: 25 },
+    { subject_code: '21GNH101J', subject_name: 'Philosophy of Engineering', attended: 12, total: 16 },
+    { subject_code: '21BTB103T', subject_name: 'Biology', attended: 7, total: 10 },
+    { subject_code: '21LEH104T', subject_name: 'German Language', attended: 14, total: 18 },
+    { subject_code: '21MES101L', subject_name: 'Basic Civil and Mechanical Workshop', attended: 16, total: 20 },
+    { subject_code: '21PDM102L', subject_name: 'General Aptitude (CDC)', attended: 8, total: 12 },
+    { subject_code: '21GNM102L', subject_name: 'NSS / Social Outreach', attended: 6, total: 10 },
+  ],
+
   '21BCE0001': [
     { subject_code: '21MAB102T', subject_name: 'Advanced Calculus and Complex Analysis', attended: 18, total: 22 },
     { subject_code: '21CYB101J', subject_name: 'Chemistry', attended: 25, total: 30 },
@@ -193,8 +256,9 @@ const DEMO_ATTENDANCE = {
 function demoLogin(registerNo, password) {
   const reg = registerNo.trim().toUpperCase();
   const student = DEMO_STUDENTS.find(s => s.register_no === reg);
-  if (!student) return { error: 'Student not found. Use a demo account (DEMO / demo).' };
-  if (student.password_hash !== password) return { error: 'Incorrect password.' };
-  const attendanceRows = DEMO_ATTENDANCE[reg] || DEMO_ATTENDANCE['21BCE0001'];
+  if (!student) return { error: `Student '${registerNo}' not found. Use a sample account: 21ECE101 (Distinction), 22BME202 (Danger Zone), or DEMO.` };
+  if (student.password_hash !== password) return { error: 'Incorrect password. (Try pass123 or demo)' };
+  const attendanceRows = DEMO_ATTENDANCE[reg] || DEMO_ATTENDANCE['DEMO'] || DEMO_ATTENDANCE['21ECE101'];
   return { student, attendanceRows };
 }
+

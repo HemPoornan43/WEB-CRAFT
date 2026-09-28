@@ -325,6 +325,119 @@
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Quick-test User Scenarios */
+.login-scenarios {
+  margin-top: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.login-scenarios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.login-scenarios-sub {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: #64748b;
+  text-transform: none;
+}
+
+.login-scenario-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-scenario-card {
+  text-align: left;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.login-scenario-card:hover {
+  transform: translateY(-1px);
+  background: rgba(30, 41, 59, 0.85);
+}
+
+.login-scenario-card.scenario-distinction:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.12);
+}
+
+.login-scenario-card.scenario-danger:hover {
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.12);
+}
+
+.scenario-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-bottom: 3px;
+}
+
+.scenario-badge.badge-green {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.scenario-badge.badge-red {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.scenario-badge.badge-amber {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.scenario-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.scenario-creds {
+  font-size: 0.74rem;
+  color: #cbd5e1;
+  margin-top: 2px;
+}
+
+.scenario-creds code {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: #93c5fd;
+  font-family: monospace;
+}
+
+.scenario-desc {
+  font-size: 0.70rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
 /* Demo row */
 .login-demo-row {
   display: flex;

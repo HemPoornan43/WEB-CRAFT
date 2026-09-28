@@ -83,13 +83,13 @@ The login banner will show **🟢 Connected to Supabase Database**.
 
 ---
 
-## 👥 Built-in Test Credentials
+## 👥 Multi-Scenario Test Credentials
 
-| Register Number | Password | Name | Section | Status |
-|---|---|---|---|---|
-| `DEMO` | `demo` | Demo Student | I-ECE-A | Built-in (Always Works) |
-| `21BCE0001` | `password123` | Aarav Sharma | I-ECE-A | Seeded in DB |
-| `21BCE0002` | `demo` | Priya Nair | I-ECE-A | Seeded in DB |
-| `21BCE0003` | `password123` | Rahul Verma | I-ECE-B | Seeded in DB |
+| Scenario | Register Number | Password | Student Name | Section | Attendance % | What to Test |
+|---|---|---|---|---|---|---|
+| 🌟 **Distinction (Safe Zone)** | `21ECE101` | `pass123` | Aditya Raman | `I-ECE-A` | **92.57%** | Safe buffer, 20+ bunks available, honors badge |
+| ⚠️ **Danger Zone (Detention Risk)** | `22BME202` | `pass123` | Kavya Sundaram | `II-BME` | **68.60%** | <75% Siren alert, 0 bunks, attendance recovery plan (44 classes) |
+| 🎯 **Balanced Demo** | `DEMO` | `demo` | Aarav Sharma | `I-ECE-A` | **79.43%** | Moderate buffer, 7 safe bunks remaining |
+| 👤 Standard Student | `21BCE0001` | `password123` | Aarav Sharma | `I-ECE-A` | **79.43%** | Standard ECE student profile |
 
-> 💡 Click the **"🎮 Fill Demo Credentials"** button on the login screen to sign in instantly with one click.
+> 💡 **Quick 1-Click Login**: On the login screen, click any of the scenario cards under **"⚡ Quick-Test User Scenarios"** to instantly sign in without typing!

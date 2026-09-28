@@ -171,18 +171,75 @@ export default function LoginPage({ onLogin }) {
           </button>
         </form>
 
-        {/* Demo shortcut */}
-        {!isSupabaseConfigured && (
-          <div className="login-demo-row">
-            <span className="login-demo-label">Testing?</span>
-            <button type="button" className="login-demo-btn" onClick={handleDemo}>
-              🎮 Fill Demo Credentials
-            </button>
-            <span style={{ fontSize: '0.72rem', color: '#64748b' }}>
-              (DEMO / demo)
-            </span>
+        {/* Multi-Scenario Test Profiles */}
+        <div className="login-scenarios">
+          <div className="login-scenarios-header">
+            <span>⚡ Quick-Test User Scenarios</span>
+            <span className="login-scenarios-sub">Click to 1-Click Login</span>
           </div>
-        )}
+
+          <div className="login-scenario-cards">
+            {/* Scenario 1: Distinction */}
+            <button
+              type="button"
+              id="test-user-distinction-btn"
+              className="login-scenario-card scenario-distinction"
+              onClick={() => {
+                setRegisterNo('21ECE101');
+                setPassword('pass123');
+                doLogin('21ECE101', 'pass123');
+              }}
+              title="Click to test Distinction Scenario"
+            >
+              <div className="scenario-badge badge-green">🌟 92.6% · Distinction (Safe Zone)</div>
+              <div className="scenario-name">Aditya Raman · Section I-ECE-A</div>
+              <div className="scenario-creds">
+                User: <code>21ECE101</code> &nbsp;|&nbsp; Pwd: <code>pass123</code>
+              </div>
+              <div className="scenario-desc">High attendance, honors buffer, 20+ safe bunks available</div>
+            </button>
+
+            {/* Scenario 2: Danger Zone */}
+            <button
+              type="button"
+              id="test-user-danger-btn"
+              className="login-scenario-card scenario-danger"
+              onClick={() => {
+                setRegisterNo('22BME202');
+                setPassword('pass123');
+                doLogin('22BME202', 'pass123');
+              }}
+              title="Click to test Danger Zone Scenario"
+            >
+              <div className="scenario-badge badge-red">⚠️ 68.6% · Detention Risk (Danger Zone)</div>
+              <div className="scenario-name">Kavya Sundaram · Section II-BME</div>
+              <div className="scenario-creds">
+                User: <code>22BME202</code> &nbsp;|&nbsp; Pwd: <code>pass123</code>
+              </div>
+              <div className="scenario-desc">Below 75%, detention alert active, needs 44 classes to recover</div>
+            </button>
+
+            {/* Scenario 3: Standard Demo */}
+            <button
+              type="button"
+              id="test-user-demo-btn"
+              className="login-scenario-card scenario-balanced"
+              onClick={() => {
+                setRegisterNo('DEMO');
+                setPassword('demo');
+                doLogin('DEMO', 'demo');
+              }}
+              title="Click to test Balanced Demo Student"
+            >
+              <div className="scenario-badge badge-amber">🎯 79.4% · Balanced Demo</div>
+              <div className="scenario-name">Aarav Sharma · Section I-ECE-A</div>
+              <div className="scenario-creds">
+                User: <code>DEMO</code> &nbsp;|&nbsp; Pwd: <code>demo</code>
+              </div>
+              <div className="scenario-desc">Standard student with 7 safe bunks remaining</div>
+            </button>
+          </div>
+        </div>
 
         {/* Info */}
         <div className="login-footer-info">
